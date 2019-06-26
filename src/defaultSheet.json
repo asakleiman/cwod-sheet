@@ -1,0 +1,110 @@
+[{
+        "boxname": "stats1",
+        "title": "Name",
+        "postion": "01",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Breed",
+        "postion": "02",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Pack Name",
+        "postion": "03",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Player",
+        "postion": "04",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Pryio",
+        "postion": "05",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Pack Totem",
+        "postion": "06",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Chronicle",
+        "postion": "07",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Tribe",
+        "postion": "08",
+        "type": "text"
+    },
+    {
+        "boxname": "stats1",
+        "title": "Concept",
+        "postion": "09",
+        "type": "text"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Strength",
+        "postion": "01",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Charisma",
+        "postion": "02",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Perception",
+        "postion": "03",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Dexterity",
+        "postion": "04",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Stamina",
+        "postion": "05",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Appearance",
+        "postion": "06",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Manipulation",
+        "postion": "07",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Intelligence",
+        "postion": "08",
+        "type": "combo"
+    },
+    {
+        "boxname": "attributes",
+        "title": "Wits",
+        "postion": "09",
+        "type": "combo"
+    }
+
+]

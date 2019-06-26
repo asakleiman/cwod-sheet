@@ -1,0 +1,117 @@
+[{
+        "stats1": [{
+                "title": "Name",
+                "position": "1",
+                "type": "text"
+            },
+            {
+                "boxname": "stats1",
+                "title": "Breed",
+                "postion": "2",
+                "type": "text"
+            },
+            {
+                "boxname": "stats1",
+                "title": "Pack Name",
+                "postion": "3",
+                "type": "text"
+            }
+        ]
+
+    }, ,
+    {
+        "boxname": "abilities",
+        "title": "alertness",
+        "postion": "1",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Animal-Ken",
+        "postion": "2",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Acedemics",
+        "postion": "3",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Athletics",
+        "postion": "4",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Crafts",
+        "postion": "5",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Computer",
+        "postion": "6",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Brawl",
+        "postion": "7",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Drive",
+        "postion": "8",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Enigmas",
+        "postion": "9",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Empathy",
+        "postion": "10",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Etiquette",
+        "postion": "11",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Investigation",
+        "postion": "12",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Expression",
+        "postion": "13",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Firearms",
+        "postion": "14",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "Law",
+        "postion": "15",
+        "type": "combo"
+    },
+    {
+        "boxname": "abilities",
+        "title": "",
+        "postion": "",
+        "type": "combo"
+    }
