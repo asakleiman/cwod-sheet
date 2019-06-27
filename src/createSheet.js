@@ -51,81 +51,61 @@ class NewSheet extends React.Component{
         this.setState({[fieldName] : entry});
     }
 
+    //Creates New Sheet in Database
+    sheetMap = (event) =>  {
+        event.preventDefault();
+        const entry = this.state.newName;
+        const charSheets =
+        db.collection('users').doc(firebase.auth().currentUser.uid)
+        .collection('charachterSheets');
+        charSheets
+        .doc(entry)
+        .set({name: entry});
+        // create empty structure
+        blankSheet.map((item, idx) => {
 
+            charSheets.doc(entry).collection('statBoxes')
+            .doc(item.boxname)
+            .collection('filler')
+            .doc(item.title).set({'position':item.postion})
+            
+            charSheets.doc(entry).collection('statBoxes')
+            .doc(item.boxname)
+            .collection('filler')
+            .doc(item.title).update({
+                'title': item.title
 
-    // getSheetsNames(statsName)
-    // {
-    //     const currentUser = firebase.auth().currentUser;
-
-    //     console.log (statsNameQuery);
-    //     const listener = db
-    //     .collection('users')
-    //     .doc(currentUser.uid)
-    //     .collection('charachterSheets')
-    //     .doc(this.state.sheetName)
-
-    // }
-
-
-    // addSheetsListener(statsName)
-    // {
-    //     const currentUser = firebase.auth().currentUser;
-    //     const listener = db
-    //     .collection('users')
-    //     .doc(currentUser.uid)
-    //     .collection('charachterSheets')
-    //     .doc('sheetsList')
-    //     .onSnapshot(snapshot => {
-    //         this.setState({
-    //             'sheetsName': snapshot.docs
-    //         });
-    //     });
-    // }
-
-  sheetMap = (event) =>  {
-    event.preventDefault();
-    const entry = this.state.newName;
-    const charSheets =
-    db.collection('users').doc(firebase.auth().currentUser.uid)
-    .collection('charachterSheets');
-    charSheets
-    .doc(entry)
-    .set({name: entry});
-
-
-
-    
-    blankSheet.map((item, idx) => {
-
-        charSheets.doc(entry).collection('statBoxes')
-        .doc(item.boxname)
-        .collection('filler')
-        .doc(item.title).set({'position':item.postion})
+            });       
+            charSheets.doc(entry).collection('statBoxes')
+            .doc(item.boxname)
+            .collection('filler')
+            .doc(item.title).update({
+                'type':item.type
+            });
+            charSheets.doc(entry).collection('statBoxes')
+            .doc(item.boxname)
+            .collection('filler')
+            .doc(item.title).update({
+                'value': '0'
+            });  
+            return (<div key={idx} >
+                <div>Has to return something. Fix this!</div>
+                </div>
+                )
+        });
         
         charSheets.doc(entry).collection('statBoxes')
-        .doc(item.boxname)
+        .doc('stats1')
         .collection('filler')
-        .doc(item.title).update({
-            'title': item.title
-
-        });       
-        charSheets.doc(entry).collection('statBoxes')
-        .doc(item.boxname)
-        .collection('filler')
-        .doc(item.title).update({
-            'type':item.type
+        .doc('Name').update({
+            'value': entry
         });
-        charSheets.doc(entry).collection('statBoxes')
-        .doc(item.boxname)
-        .collection('filler')
-        .doc(item.title).update({
-            'value': '0'
-        });  
-        return (<div key={idx} >
-            <div>Has to return something. Fix this!</div>
-            </div>
-            )
-        });
+        // charSheets.doc(entry).collection('statBoxes')
+        // .doc('stats1')
+        // .collection('filler')
+        // .doc('Player').update({
+        //     'value': entry
+        // });
     }
 
 
@@ -138,15 +118,16 @@ class NewSheet extends React.Component{
     };
 
     render(){
+        console.log(this.state.playerName);
         const sheetNamesList = this.state.sheetsNames.map(charSheetName => {
 
-            return (
+        return (
                 <li key={charSheetName.id}>
+                    <button className = 'button' onClick={(e) => this.deleteSheet(charSheetName.id)}>Delete</button>
                     <Link to={{
                         pathname: '/sheet',
                         state:{sheetName: charSheetName.id}
-                    }}>{charSheetName.id}</Link>
-                    <button className = 'button' onClick={(e) => this.deleteSheet(charSheetName.id)}>Delete</button>
+                    }}>{charSheetName.id}</Link>                    
                 </li>
             );
         });
@@ -155,7 +136,6 @@ class NewSheet extends React.Component{
                 <ul>
                     {sheetNamesList}
                 </ul>
-
 
                 <form className=  'wrapper' onSubmit={this.sheetMap}>
                     <label>CREATE NEW SHEET</label>

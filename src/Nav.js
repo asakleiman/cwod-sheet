@@ -31,23 +31,26 @@ class Nav extends React.Component {
 
     render() {
         const {user} = this.state;
-
+        const signOut = user ? <button className = 'button' onClick={this.signOut}>SIGN OUT</button> : null;
         const userDisplayName = user ? (
-            <strong>
-                {user.displayName || user.phoneNumber}
-            </strong>
-         ) : null;
-        const signOut = user ? <button className = 'button' onClick={this.signOut}>Sign Out</button> : null;
+            <div className='thinWrapper'>
+                <div>
+                    <strong>
+                        {user.displayName}
+                    </strong>
+                </div>
+                <div><Link to="/createSheet">SHEETS</Link></div>
+                <div>{signOut}</div>
+             </div>
+         ) : <div className = 'thinWrapper'><div>SIGN IN</div></div>;
+        
+
+
 
         return (
             <div>
                 {userDisplayName}
                 
-                <div className='thinWrapper'>
-                    <div><Link to="/">Home</Link></div>
-                    <div><Link to="/createSheet">Sheets</Link></div>
-                    <div>{signOut}</div>
-                </div>
             </div>
         )
     }

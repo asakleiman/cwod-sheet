@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import './journal.css';
-
+import { SelectNumber } from './clickBoxes';
 
 const db = firebase.firestore();
 
@@ -24,7 +24,6 @@ export default class Sheet extends React.Component {
             raNoWi: [],
             feraTrib: [],
             user: null,
-            // TODO: Set this from database choice
             sheetName: this.props.location.state.sheetName,
             // create a list of stat boxes - TODO: import from database on load.
             boxList: [
@@ -49,8 +48,8 @@ export default class Sheet extends React.Component {
         // this.addBoxListener('statBox1');
         
         //add listeners for the boxes
-        this.state.boxList.map((bName) =>{ 
-            this.addStatsListener(bName)
+        this.state.boxList.map((statsName) =>{ 
+            this.addStatsListener(statsName)
         });
  
     }
@@ -91,9 +90,9 @@ export default class Sheet extends React.Component {
 
     }
 
-    // Sets the input field onChange
-    onEntryChange = (event) => {
-        const entry = event.target.value;
+    // Sets the input field and saves to database onChange
+    onValueChange = (event) => {
+        const value = event.target.value;
         const fieldName = event.target.name;
         const dbCollection = db.collection('users').doc(firebase.auth().currentUser.uid)
         .collection('charachterSheets')
@@ -101,22 +100,27 @@ export default class Sheet extends React.Component {
         .collection('statBoxes')
         .doc(event.target.dataset.boxname)
         .collection('filler')
-        dbCollection.doc(fieldName).update({'value': entry});
-        this.setState({[fieldName] : entry});
+        dbCollection.doc(fieldName).update({'value': value});
+        this.setState({[fieldName] : value});
 
     }
     onTextChange = (event) => {
-        const entry = event.target.value;
+        const value = event.target.value;
         const fieldName = event.target.name;
-        // const dbCollection = db.collection('users').doc(firebase.auth().currentUser.uid)
-        // .collection('testSheet1')
-        // .doc('statBox1')
-        // .collection('stats1');
-        // dbCollection.doc(fieldName).update({'value': entry});
-        this.setState({[fieldName] : entry});
+        this.setState({[fieldName] : value});
 
     }
+    handleDotClick = (boxName, fieldName, numValue) => {
+        const dbCollection = db.collection('users').doc(firebase.auth().currentUser.uid)
+        .collection('charachterSheets')
+        .doc(this.state.sheetName)
+        .collection('statBoxes')
+        .doc(boxName)
+        .collection('filler')
+        dbCollection.doc(fieldName).update({'value': numValue});
+        this.setState({[fieldName] : numValue});
 
+      }
     // addJournalEntry = (event) => {
     //     event.preventDefault();
     //     const dbCollection = db.collection('users').doc(firebase.auth().currentUser.uid)
@@ -135,13 +139,14 @@ export default class Sheet extends React.Component {
 
 
     render() {
+        // console.log ((this.state.attributes.length == 0) ?'undefininated!': this.state.attributes[1].data());
 
-
-        // console.log(this.props.location.state.sheetName);
         // Please DRY me I am TOO WET HERE
         //Not a good thing in this case
-        //this.state.[something].map(etc
-        //TODO - move to seperate file use props to pass data
+        // this.state.A List of Stat Boxes Imported From NewSheet?.map =>
+        //      this.state.[something].map(etc
+        //
+        //TODO - just break this out into a component because it's REACT idiot
         //If the first boxes work the remaining boxes will be easy to add
         const stats1 = this.state.stats1.map(dataBox => {
             return (
@@ -149,7 +154,7 @@ export default class Sheet extends React.Component {
                 <div key={dataBox.id}>
                     {/* .data() gets the object stored - remeber the .value is just the DATA NAME */}
                     {dataBox.data().title}
-                    <input data-boxname = "stats1" name = {dataBox.data().title} onChange = {this.onEntryChange} value = {dataBox.data().value}></input>
+                    <input data-boxname = "stats1" name = {dataBox.data().title} onChange = {this.onValueChange} value = {dataBox.data().value}></input>
 
                 </div>
             );
@@ -159,10 +164,9 @@ export default class Sheet extends React.Component {
             return (
                 // .id gets the generated id for this object
                 <div key={dataBox.id}>
-                    {/* .data() gets the object stored - remeber the .value is just the DATA NAME */}
                     {dataBox.data().title}
-                    <input data-boxname = "attributes" name = {dataBox.data().title} onChange = {this.onEntryChange} value = {dataBox.data().value}></input>
-
+                    <input data-boxname = "attributes" name = {dataBox.data().title} onChange = {this.onValueChange} value = {dataBox.data().value}></input>
+                    <SelectNumber boxName = "attributes" name = {dataBox.data().title} value={dataBox.data().value}  onSelectNumber={this.handleDotClick}/>
                 </div>
             );
         });
@@ -179,17 +183,17 @@ export default class Sheet extends React.Component {
         //     );
         // });
 
-        const advantages = this.state.advantages.map(dataBox => {
-            return (
-                // .id gets the generated id for this object
-                <div key={dataBox.id}>
-                    {/* .data() gets the object stored - remeber the .value is just the DATA NAME */}
-                    {dataBox.data().title}
-                    <input data-boxname = "advantages" name = {dataBox.data().title} onChange = {this.onEntryChange} value = {dataBox.data().value}></input>
+        // const advantages = this.state.advantages.map(dataBox => {
+        //     return (
+        //         // .id gets the generated id for this object
+        //         <div key={dataBox.id}>
+        //             {/* .data() gets the object stored - remeber the .value is just the DATA NAME */}
+        //             {dataBox.data().title}
+        //             <input data-boxname = "advantages" name = {dataBox.data().title} onChange = {this.onEntryChange} value = {dataBox.data().value}></input>
 
-                </div>
-            );
-        });
+        //         </div>
+        //     );
+        // });
         
         // const renown = this.state.renown.map(dataBox => {
         //     return (
@@ -247,7 +251,6 @@ export default class Sheet extends React.Component {
 
         return (
             <div className = "big-box">
-                {/* <div>{sheetsList}</div> */}
                 <h1>{this.state.sheetName}</h1>
 
                 <div className = "wrapper">

@@ -9,19 +9,19 @@ export default class Home extends React.Component {
     uiConfig = {
         signInFlow: 'popup',
         signInOptions: [
-            firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         callbacks: {
             // redirects to /journal after successful sign-in
-            signInSuccessWithAuthResult: () => this.props.history.push('/sheets')
+            signInSuccessWithAuthResult: () => this.props.history.push('/createSheet')
         }
     }
 
     render() {
         return (
             <div>
-                <h1>Home</h1>
+                <h1></h1>
                 <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
             </div>
         )
